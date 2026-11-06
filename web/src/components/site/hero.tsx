@@ -1,14 +1,14 @@
 "use client";
 
 import { animate, createScope, stagger, type Scope } from "animejs";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import React from "react";
 
 import { LiquidButton } from "@/components/animate-ui/buttons/liquid";
 import { Magnetic } from "@/components/animate-ui/primitives/effects/magnetic";
-import { HighlightText } from "@/components/animate-ui/primitives/texts/highlight";
 import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering";
+import { TypingText, TypingTextCursor } from "@/components/animate-ui/primitives/texts/typing";
 import { CursorGlow } from "@/components/ui/skiper-ui/skiper61";
 import { catalog } from "@/lib/catalog";
 
@@ -31,6 +31,91 @@ const ORBS: [string, number, number, number][] = [
 ];
 
 const appsById = new Map(catalog.apps.map((a) => [a.id, a]));
+
+const LINE_1 = "Every business app.";
+const LINE_2 = "One platform.";
+const CHAR_MS = 75;
+const START_MS = 500;
+const LINE_GAP_MS = 350;
+const LINE_2_START = START_MS + LINE_1.length * CHAR_MS + LINE_GAP_MS;
+const TYPING_DONE = LINE_2_START + LINE_2.length * CHAR_MS;
+
+// One typed line: an invisible copy reserves the final width so the centred
+// layout never shifts while Animate UI's TypingText fills it in.
+function TypedLine({
+  text,
+  delay,
+  showCursor,
+  className,
+}: {
+  text: string;
+  delay: number;
+  showCursor: boolean;
+  className?: string;
+}) {
+  return (
+    <span className="relative inline-grid">
+      <span className="invisible col-start-1 row-start-1">{text}</span>
+      <TypingText text={text} delay={delay} duration={CHAR_MS} className={`col-start-1 row-start-1 text-left ${className ?? ""}`}>
+        {showCursor && (
+          <TypingTextCursor
+            className="ml-1 bg-teal"
+            style={{ width: "0.06em", height: "0.8em", transform: "translateY(0.08em)", backgroundColor: "var(--teal)" }}
+          />
+        )}
+      </TypingText>
+    </span>
+  );
+}
+
+// "Every business app. One platform." in handwriting, typed letter by letter;
+// the marker sweeps behind line 2 once typing finishes.
+function HandwrittenHeadline() {
+  const reduce = useReducedMotion();
+  const [line, setLine] = React.useState<1 | 2>(1);
+
+  React.useEffect(() => {
+    const t = window.setTimeout(() => setLine(2), LINE_2_START);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  const base = "font-hand text-[3.25rem] font-bold leading-[1.05] tracking-normal sm:text-8xl lg:text-[7.5rem]";
+
+  if (reduce) {
+    return (
+      <h1 className={base}>
+        <span className="text-gradient">{LINE_1}</span>
+        <br />
+        <span className="rounded-2xl bg-[linear-gradient(100deg,color-mix(in_oklab,var(--marker)_85%,transparent),color-mix(in_oklab,var(--teal)_35%,transparent))] px-4">
+          {LINE_2}
+        </span>
+      </h1>
+    );
+  }
+
+  return (
+    <h1 className={base} aria-label={`${LINE_1} ${LINE_2}`}>
+      <span aria-hidden>
+        <TypedLine text={LINE_1} delay={START_MS} showCursor={line === 1} className="text-gradient pb-[0.12em]" />
+        <br />
+        <motion.span
+          className="inline-block rounded-2xl px-4"
+          initial={{ backgroundSize: "0% 100%" }}
+          animate={{ backgroundSize: "100% 100%" }}
+          transition={{ delay: TYPING_DONE / 1000, duration: 1, ease: [0.2, 0.8, 0.2, 1] }}
+          style={{
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "left center",
+            backgroundImage:
+              "linear-gradient(100deg, color-mix(in oklab, var(--marker) 85%, transparent), color-mix(in oklab, var(--teal) 35%, transparent))",
+          }}
+        >
+          <TypedLine text={LINE_2} delay={LINE_2_START} showCursor={line === 2} />
+        </motion.span>
+      </span>
+    </h1>
+  );
+}
 
 export function Hero() {
   const { open } = useContact();
@@ -100,25 +185,7 @@ export function Hero() {
             />
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
-            className="text-5xl font-extrabold leading-[1.02] tracking-[-0.045em] sm:text-7xl lg:text-[5.5rem]"
-          >
-            <span className="text-gradient">Every business app.</span>
-            <br />
-            <HighlightText
-              text="One platform."
-              delay={700}
-              transition={{ duration: 1.1, ease: [0.2, 0.8, 0.2, 1] }}
-              className="rounded-xl px-3"
-              style={{
-                backgroundImage:
-                  "linear-gradient(100deg, color-mix(in oklab, var(--marker) 85%, transparent), color-mix(in oklab, var(--teal) 35%, transparent))",
-              }}
-            />
-          </motion.h1>
+          <HandwrittenHeadline />
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
