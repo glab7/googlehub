@@ -72,7 +72,11 @@ function ThemeToggle() {
         style.id = THEME_STYLE_ID;
         document.head.appendChild(style);
       }
-      style.textContent = css;
+      // Hold the fully revealed mask until the transition ends; without
+      // `forwards` the mask snaps back for one frame and the old theme flashes.
+      style.textContent = `${css}
+        ::view-transition-new(root) { animation-fill-mode: forwards; }
+        ::view-transition-old(root), .dark::view-transition-old(root) { animation: none; }`;
 
       document.startViewTransition(() => {
         flushSync(() => setTheme(next));
