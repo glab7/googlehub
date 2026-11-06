@@ -1,0 +1,9 @@
+#:schema node_modules/wrangler/config-schema.json
+# Cloudflare Pages: serves the Next.js export (web/out) as static files and functions/ as the /api edge API.
+name = "orbita"
+pages_build_output_dir = "web/out"
+compatibility_date = "2026-09-01"
+
+[vars]
+FIREBASE_PROJECT_ID = "main-branch-8b78f"
+# Optional: `wrangler pages secret put FIREBASE_API_KEY` to send the web API key with Firestore calls.

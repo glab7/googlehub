@@ -1,0 +1,32 @@
+rules_version = '2';
+
+// Orbita: the contact form may create leads; nobody can read, list, update
+// or delete them from a client. Read leads in the Firebase console or with
+// the Admin SDK (which bypasses these rules).
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /leads/{leadId} {
+      allow create: if validLead(request.resource.data);
+      allow read, update, delete: if false;
+    }
+
+    function validLead(d) {
+      return d.keys().hasOnly(['name', 'email', 'company', 'message', 'source', 'createdAt'])
+        && d.keys().hasAll(['name', 'email', 'createdAt'])
+        && d.name is string && d.name.size() > 0 && d.name.size() <= 120
+        && d.email is string && d.email.size() <= 200
+        && d.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && (!('company' in d) || (d.company is string && d.company.size() <= 120))
+        && (!('message' in d) || (d.message is string && d.message.size() <= 2000))
+        && (!('source' in d) || d.source in ['go-server', 'cloudflare', 'flutter'])
+        && d.createdAt is timestamp
+        && d.createdAt > request.time - duration.value(5, 'm')
+        && d.createdAt < request.time + duration.value(5, 'm');
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

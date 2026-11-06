@@ -1,0 +1,184 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-hand: var(--font-caveat);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-teal: var(--teal);
+  --color-marker: var(--marker);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* ---------- Light glass ---------- */
+:root {
+  --radius: 0.875rem;
+  --background: #f3eef6;
+  --foreground: #1d1724;
+  --card: rgb(255 255 255 / 0.55);
+  --card-foreground: #1d1724;
+  --popover: rgb(255 255 255 / 0.8);
+  --popover-foreground: #1d1724;
+  --primary: #714b67;
+  --primary-foreground: #ffffff;
+  --secondary: rgb(255 255 255 / 0.6);
+  --secondary-foreground: #1d1724;
+  --muted: rgb(113 75 103 / 0.1);
+  --muted-foreground: #5d5568;
+  --accent: rgb(1 126 132 / 0.12);
+  --accent-foreground: #015e63;
+  --destructive: #c23b3b;
+  --border: rgb(29 23 36 / 0.1);
+  --input: rgb(29 23 36 / 0.14);
+  --ring: #714b67;
+  --teal: #017e84;
+  --marker: #ffd86b;
+  --glow: rgb(113 75 103 / 0.35);
+
+  --glass-bg: linear-gradient(135deg, rgb(255 255 255 / 0.72), rgb(255 255 255 / 0.38));
+  --glass-border: rgb(255 255 255 / 0.75);
+  --glass-edge: rgb(255 255 255 / 0.9);
+  --glass-shadow: 0 1px 0 0 rgb(255 255 255 / 0.8) inset, 0 20px 50px -20px rgb(61 30 72 / 0.28),
+    0 2px 6px rgb(61 30 72 / 0.06);
+  --glass-strong: rgb(255 255 255 / 0.82);
+}
+
+/* ---------- Dark glass ---------- */
+.dark {
+  --background: #0b0812;
+  --foreground: #f4effa;
+  --card: rgb(255 255 255 / 0.06);
+  --card-foreground: #f4effa;
+  --popover: rgb(22 16 30 / 0.85);
+  --popover-foreground: #f4effa;
+  --primary: #d6a6e6;
+  --primary-foreground: #1d1027;
+  --secondary: rgb(255 255 255 / 0.08);
+  --secondary-foreground: #f4effa;
+  --muted: rgb(255 255 255 / 0.08);
+  --muted-foreground: #b3a9c0;
+  --accent: rgb(56 214 210 / 0.14);
+  --accent-foreground: #7ff0ea;
+  --destructive: #ff7b7b;
+  --border: rgb(255 255 255 / 0.1);
+  --input: rgb(255 255 255 / 0.14);
+  --ring: #d6a6e6;
+  --teal: #4fe0d8;
+  --marker: rgb(255 200 80 / 0.55);
+  --glow: rgb(214 166 230 / 0.28);
+
+  --glass-bg: linear-gradient(135deg, rgb(255 255 255 / 0.11), rgb(255 255 255 / 0.03));
+  --glass-border: rgb(255 255 255 / 0.13);
+  --glass-edge: rgb(255 255 255 / 0.28);
+  --glass-shadow: 0 1px 0 0 rgb(255 255 255 / 0.12) inset, 0 30px 60px -25px rgb(0 0 0 / 0.7);
+  --glass-strong: rgb(30 22 40 / 0.78);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 35%, transparent);
+  }
+}
+
+@layer components {
+  /* Frosted glass surface: translucent fill, blur, bright top edge. */
+  .glass {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    backdrop-filter: blur(22px) saturate(170%);
+  }
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(160deg, var(--glass-edge), transparent 40%, transparent 70%, var(--glass-edge));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .glass-strong {
+    background: var(--glass-strong);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+  .noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  }
+  .text-gradient {
+    background: linear-gradient(100deg, var(--foreground) 10%, var(--primary) 55%, var(--teal) 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* Coverflow: dim the side slides so the active quote leads. */
+  .swiper-slide {
+    transition: opacity 0.4s, filter 0.4s;
+  }
+  .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.45;
+    filter: blur(1px);
+  }
+  /* Swiper pagination dots in theme colours. */
+  .swiper-pagination-bullet {
+    background: var(--muted-foreground) !important;
+    opacity: 0.35 !important;
+    transition: width 0.25s, opacity 0.25s;
+  }
+  .swiper-pagination-bullet-active {
+    width: 22px !important;
+    border-radius: 99px !important;
+    background: var(--primary) !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

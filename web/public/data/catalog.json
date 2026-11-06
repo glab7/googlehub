@@ -1,0 +1,359 @@
+{
+  "categories": [
+    "Finance",
+    "Sales",
+    "Websites",
+    "Supply Chain",
+    "Human Resources",
+    "Marketing",
+    "Services",
+    "Productivity"
+  ],
+  "apps": [
+    {
+      "id": "accounting",
+      "name": "Accounting",
+      "category": "Finance",
+      "color": "#e05d5d",
+      "tagline": "Real-time books, bank sync and reports"
+    },
+    {
+      "id": "invoicing",
+      "name": "Invoicing",
+      "category": "Finance",
+      "color": "#f08a4b",
+      "tagline": "Send invoices and get paid faster"
+    },
+    {
+      "id": "expenses",
+      "name": "Expenses",
+      "category": "Finance",
+      "color": "#2fa49b",
+      "tagline": "Snap receipts, approve in one click"
+    },
+    {
+      "id": "spreadsheet",
+      "name": "Spreadsheet",
+      "category": "Finance",
+      "color": "#3fa66b",
+      "tagline": "Live business data in a familiar grid"
+    },
+    {
+      "id": "documents",
+      "name": "Documents",
+      "category": "Finance",
+      "color": "#d9a23a",
+      "tagline": "Store, tag and share every file"
+    },
+    {
+      "id": "sign",
+      "name": "Sign",
+      "category": "Finance",
+      "color": "#5a78d6",
+      "tagline": "Legally binding e-signatures"
+    },
+    {
+      "id": "crm",
+      "name": "CRM",
+      "category": "Sales",
+      "color": "#2f9ec4",
+      "tagline": "Track leads and close more deals"
+    },
+    {
+      "id": "sales",
+      "name": "Sales",
+      "category": "Sales",
+      "color": "#e67e3c",
+      "tagline": "Quotes to orders in minutes"
+    },
+    {
+      "id": "pos",
+      "name": "Point of Sale",
+      "category": "Sales",
+      "color": "#8b5cc4",
+      "tagline": "Shop and restaurant checkout"
+    },
+    {
+      "id": "subscriptions",
+      "name": "Subscriptions",
+      "category": "Sales",
+      "color": "#c4527a",
+      "tagline": "Recurring revenue on autopilot"
+    },
+    {
+      "id": "rental",
+      "name": "Rental",
+      "category": "Sales",
+      "color": "#4a9a8f",
+      "tagline": "Bookings, pickups and returns"
+    },
+    {
+      "id": "website",
+      "name": "Website Builder",
+      "category": "Websites",
+      "color": "#3d8be0",
+      "tagline": "Drag-and-drop sites that convert"
+    },
+    {
+      "id": "ecommerce",
+      "name": "eCommerce",
+      "category": "Websites",
+      "color": "#e3a13b",
+      "tagline": "Sell online with built-in payments"
+    },
+    {
+      "id": "blog",
+      "name": "Blog",
+      "category": "Websites",
+      "color": "#7c6bd6",
+      "tagline": "Publish stories that rank"
+    },
+    {
+      "id": "forum",
+      "name": "Forum",
+      "category": "Websites",
+      "color": "#3caea3",
+      "tagline": "Grow a community around your product"
+    },
+    {
+      "id": "elearning",
+      "name": "eLearning",
+      "category": "Websites",
+      "color": "#d4664b",
+      "tagline": "Courses, quizzes and certifications"
+    },
+    {
+      "id": "livechat",
+      "name": "Live Chat",
+      "category": "Websites",
+      "color": "#5bb85b",
+      "tagline": "Talk to visitors in real time"
+    },
+    {
+      "id": "inventory",
+      "name": "Inventory",
+      "category": "Supply Chain",
+      "color": "#b6774a",
+      "tagline": "Smart warehouses, zero stockouts"
+    },
+    {
+      "id": "manufacturing",
+      "name": "Manufacturing",
+      "category": "Supply Chain",
+      "color": "#6b7f99",
+      "tagline": "Plan, schedule and track production"
+    },
+    {
+      "id": "plm",
+      "name": "PLM",
+      "category": "Supply Chain",
+      "color": "#8a6fc0",
+      "tagline": "Engineering changes under control"
+    },
+    {
+      "id": "purchase",
+      "name": "Purchase",
+      "category": "Supply Chain",
+      "color": "#d65f88",
+      "tagline": "Automated replenishment and RFQs"
+    },
+    {
+      "id": "maintenance",
+      "name": "Maintenance",
+      "category": "Supply Chain",
+      "color": "#4f8fc0",
+      "tagline": "Preventive and corrective upkeep"
+    },
+    {
+      "id": "quality",
+      "name": "Quality",
+      "category": "Supply Chain",
+      "color": "#47a86b",
+      "tagline": "Checks, alerts and control points"
+    },
+    {
+      "id": "employees",
+      "name": "Employees",
+      "category": "Human Resources",
+      "color": "#3e9fb8",
+      "tagline": "One directory for your whole team"
+    },
+    {
+      "id": "recruitment",
+      "name": "Recruitment",
+      "category": "Human Resources",
+      "color": "#e2774f",
+      "tagline": "Post jobs and hire the best"
+    },
+    {
+      "id": "timeoff",
+      "name": "Time Off",
+      "category": "Human Resources",
+      "color": "#58b06e",
+      "tagline": "Leave requests without the paperwork"
+    },
+    {
+      "id": "appraisals",
+      "name": "Appraisals",
+      "category": "Human Resources",
+      "color": "#cf5a6a",
+      "tagline": "Fair, regular feedback cycles"
+    },
+    {
+      "id": "fleet",
+      "name": "Fleet",
+      "category": "Human Resources",
+      "color": "#5c6fc7",
+      "tagline": "Vehicles, contracts and costs"
+    },
+    {
+      "id": "emailmkt",
+      "name": "Email Marketing",
+      "category": "Marketing",
+      "color": "#d9534f",
+      "tagline": "Beautiful campaigns that land"
+    },
+    {
+      "id": "smsmkt",
+      "name": "SMS Marketing",
+      "category": "Marketing",
+      "color": "#4caf91",
+      "tagline": "Reach customers in their pocket"
+    },
+    {
+      "id": "events",
+      "name": "Events",
+      "category": "Marketing",
+      "color": "#e0943a",
+      "tagline": "Tickets, badges and check-ins"
+    },
+    {
+      "id": "surveys",
+      "name": "Surveys",
+      "category": "Marketing",
+      "color": "#8466c9",
+      "tagline": "Ask, measure, improve"
+    },
+    {
+      "id": "social",
+      "name": "Social Marketing",
+      "category": "Marketing",
+      "color": "#3b8fd9",
+      "tagline": "Schedule posts across networks"
+    },
+    {
+      "id": "project",
+      "name": "Project",
+      "category": "Services",
+      "color": "#cf6d3d",
+      "tagline": "Kanban, Gantt and deadlines"
+    },
+    {
+      "id": "timesheets",
+      "name": "Timesheets",
+      "category": "Services",
+      "color": "#4b9ec9",
+      "tagline": "Track time, bill accurately"
+    },
+    {
+      "id": "fieldservice",
+      "name": "Field Service",
+      "category": "Services",
+      "color": "#56a65a",
+      "tagline": "Dispatch technicians on the go"
+    },
+    {
+      "id": "helpdesk",
+      "name": "Helpdesk",
+      "category": "Services",
+      "color": "#d3586c",
+      "tagline": "Tickets, SLAs and happy customers"
+    },
+    {
+      "id": "planning",
+      "name": "Planning",
+      "category": "Services",
+      "color": "#7a6ed0",
+      "tagline": "Shift scheduling made easy"
+    },
+    {
+      "id": "appointments",
+      "name": "Appointments",
+      "category": "Services",
+      "color": "#2aa39a",
+      "tagline": "Let clients book themselves"
+    },
+    {
+      "id": "discuss",
+      "name": "Discuss",
+      "category": "Productivity",
+      "color": "#e48a3c",
+      "tagline": "Chat, calls and channels"
+    },
+    {
+      "id": "approvals",
+      "name": "Approvals",
+      "category": "Productivity",
+      "color": "#5a8ed6",
+      "tagline": "Any request, any workflow"
+    },
+    {
+      "id": "knowledge",
+      "name": "Knowledge",
+      "category": "Productivity",
+      "color": "#c45ca0",
+      "tagline": "Your company wiki, connected"
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar",
+      "category": "Productivity",
+      "color": "#3faa7c",
+      "tagline": "Meetings synced everywhere"
+    }
+  ],
+  "plans": [
+    {
+      "id": "one-app",
+      "name": "One App Free",
+      "monthly": 0,
+      "yearly": 0,
+      "description": "For a single app, forever free.",
+      "features": [
+        "Unlimited users",
+        "1 app of your choice",
+        "Hosted in the cloud",
+        "Community support"
+      ],
+      "highlight": false
+    },
+    {
+      "id": "standard",
+      "name": "Standard",
+      "monthly": 24.9,
+      "yearly": 19.9,
+      "description": "All apps, one simple price per user.",
+      "features": [
+        "All 40+ apps",
+        "Online hosting & backups",
+        "Mobile apps",
+        "Email & chat support"
+      ],
+      "highlight": true
+    },
+    {
+      "id": "custom",
+      "name": "Custom",
+      "monthly": 37.4,
+      "yearly": 29.9,
+      "description": "For teams that need to go further.",
+      "features": [
+        "Everything in Standard",
+        "Studio customization",
+        "Multi-company",
+        "External API & on-premise"
+      ],
+      "highlight": false
+    }
+  ]
+}
