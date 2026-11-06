@@ -13,7 +13,7 @@ class OrbitaApi {
 
   static const base = String.fromEnvironment(
     'API_BASE',
-    defaultValue: 'https://orbita.pages.dev',
+    defaultValue: 'https://googlehub.pages.dev',
   );
 
   final http.Client _client;

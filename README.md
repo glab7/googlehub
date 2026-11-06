@@ -73,11 +73,16 @@ One-time Firebase setup (project `main-branch-8b78f`): enable Cloud Firestore an
 npm run deploy:rules
 ```
 
-Cloudflare Pages (static site + `/api` functions):
+Cloudflare Pages project `googlehub` (https://googlehub.pages.dev) is connected to this
+repo and rebuilds on every push to `main`. Its build settings:
 
-```bash
-npm run deploy         # builds web/out and runs `wrangler pages deploy`
-```
+| Setting | Value |
+| --- | --- |
+| Build command | `npm run build` |
+| Build output directory | `web/out` (also set in `wrangler.toml`) |
+| Root directory | *(repo root)* |
+
+`npm ci` at the root also installs `web/` dependencies through the `postinstall` script.
 
 ## Flutter app
 
@@ -87,7 +92,7 @@ npm run deploy         # builds web/out and runs `wrangler pages deploy`
 cd mobile
 flutter create . --project-name orbita --platforms=android,ios,web,macos
 flutter pub get
-flutter run --dart-define=API_BASE=https://orbita.pages.dev
+flutter run --dart-define=API_BASE=https://googlehub.pages.dev
 ```
 
 Without a reachable API it falls back to the bundled `assets/catalog.json`

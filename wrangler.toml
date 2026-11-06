@@ -1,6 +1,6 @@
 #:schema node_modules/wrangler/config-schema.json
 # Cloudflare Pages: serves the Next.js export (web/out) as static files and functions/ as the /api edge API.
-name = "orbita"
+name = "googlehub"
 pages_build_output_dir = "web/out"
 compatibility_date = "2026-09-01"
 
