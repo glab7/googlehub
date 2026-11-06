@@ -36,6 +36,7 @@
 /* ---------- Light glass ---------- */
 :root {
   --radius: 0.875rem;
+  --expo-out: cubic-bezier(0.16, 1, 0.3, 1); /* Skiper26 theme transition easing */
   --background: #f3eef6;
   --foreground: #1d1724;
   --card: rgb(255 255 255 / 0.55);

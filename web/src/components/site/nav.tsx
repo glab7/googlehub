@@ -5,6 +5,7 @@ import { useLenis } from "lenis/react";
 import { Menu, Monitor, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import React from "react";
+import { flushSync } from "react-dom";
 
 import { LiquidButton } from "@/components/animate-ui/buttons/liquid";
 import {
@@ -13,6 +14,7 @@ import {
   type Resolved,
   type ThemeSelection,
 } from "@/components/animate-ui/buttons/theme-toggler";
+import { createAnimation } from "@/components/ui/skiper-ui/skiper26";
 import { TextRoll } from "@/components/ui/skiper-ui/skiper58";
 import { cn } from "@/lib/utils";
 
@@ -27,14 +29,66 @@ const LINKS = [
   { href: "#pricing", label: "Pricing" },
 ];
 
+const THEME_STYLE_ID = "theme-transition-styles";
+
+function resolve(theme: ThemeSelection): Resolved {
+  if (theme !== "system") return theme;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+// Resolves once <html> carries the target theme class, so the view
+// transition snapshots the page only after next-themes has applied it.
+function themeApplied(target: Resolved): Promise<void> {
+  return new Promise((done) => {
+    const started = performance.now();
+    const check = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      if (isDark === (target === "dark") || performance.now() - started > 400) done();
+      else requestAnimationFrame(check);
+    };
+    check();
+  });
+}
+
 function ThemeToggle() {
   const { theme, resolvedTheme, setTheme } = useTheme();
+
+  // Skiper26: the new theme spreads from the top-right (where this button
+  // sits) as a soft-edged circle, via the View Transitions API.
+  const setThemeAnimated = React.useCallback(
+    (next: ThemeSelection) => {
+      const from = (resolvedTheme ?? "dark") as Resolved;
+      const to = resolve(next);
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (from === to || reduce || !document.startViewTransition) {
+        setTheme(next);
+        return;
+      }
+
+      const { css } = createAnimation("circle-blur", "top-right");
+      let style = document.getElementById(THEME_STYLE_ID) as HTMLStyleElement | null;
+      if (!style) {
+        style = document.createElement("style");
+        style.id = THEME_STYLE_ID;
+        document.head.appendChild(style);
+      }
+      style.textContent = css;
+
+      document.startViewTransition(() => {
+        flushSync(() => setTheme(next));
+        return themeApplied(to);
+      });
+    },
+    [resolvedTheme, setTheme],
+  );
+
   return (
     <ThemeTogglerButton
       aria-label="Toggle theme"
       theme={(theme ?? "dark") as ThemeSelection}
       resolvedTheme={(resolvedTheme ?? "dark") as Resolved}
-      setTheme={setTheme}
+      setTheme={setThemeAnimated}
+      modes={["light", "dark"]}
       className="size-9 rounded-full border border-[var(--glass-border)] bg-transparent text-foreground hover:bg-muted"
     >
       <ThemeTogglerButtonIcon light={<Sun className="size-4" />} dark={<Moon className="size-4" />} system={<Monitor className="size-4" />} />
